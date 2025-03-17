@@ -1,0 +1,30 @@
+@use '../../style' as s;
+@use '../field/index.scss' as field;
+
+.field__wraper {
+  width: 100%;
+  display: grid;
+  position: relative;
+  
+  .field__icon {
+    @include s.click;
+    
+    display: block;
+    width: s.space(6);
+    height: s.space(5);
+
+    background-image: url('/svg/password-hide.svg');
+    background-size: cover;
+    
+    
+    &[show] {
+      background-image: url('/svg/password-show.svg');
+    }
+    position: absolute;
+    right: s.space(4);
+    top: calc(50% - 10px);
+  }
+}
+.field__input {
+  padding-right: calc(s.space(4) + s.space(5) + s.space(4));
+}
