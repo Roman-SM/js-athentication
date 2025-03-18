@@ -1,5 +1,3 @@
-const e = require("express")
-
 class User {
   static USER_ROLE = {
     USER: 1,
@@ -21,12 +19,16 @@ class User {
     role = Object.values(this.USER_ROLE).includes(role)
      ? role
      : this.USER_ROLE.USER
-
      return role
   }
   static create(data) {
     const user = new User(data)
     this.#list.push(user)
+  }
+  static getByEmail(email) {
+    return (
+      this.#list.find((user) => user.email === email) || null
+    )
   }
 }
 
