@@ -6,7 +6,7 @@
 <div class="page page--background">
   <header>{{> back-button}}</header>
   <form class="page__section">
-    <h1 class="page__title">Реєстрація</h1>
+    <h1 class="page__title">Вхід</h1>
     <div class="form">
       <div class="form__item">
         {{> field action="signupForm.change" label="Ел. адреса" type="email" name="email" placeholder="Ваш e-mail"}}
@@ -16,22 +16,10 @@
         {{> field-password action="signupForm.change" label="Пароль" name="password" placeholder="Введіть пароль"}}
         <span name="password" class="form__error">Помилка!</span>
       </div>
-       <div class="form__item">
-        {{> field-password action="signupForm.change" label="Пароль" name="passwordAgain" placeholder="Пароль ще раз"}}
-        <span name="passwordAgain" class="form__error">Помилка!</span>
-      </div>
-      <div class="form__item">
-        {{> field-select action="signupForm.change" label="Роль" name="role" placeholder="Оберіть роль" list=data.role}}
-        <span name="role" class="form__error">Помилка!</span>
-      </div>
-      <div class="form__item">
-        {{> field-checkbox action="signupForm.change" label="Ви погоджуєтеся з правилами сервісу" name="isConfirm"}}
-        <span name="isConfirm" class="form__error">Помилка!</span>
-      </div>
     </div>
-    <button onclick="signupForm.submit()" class="button button--disabled" type="button">Зареєструватися</button>
+    <button onclick="signupForm.submit()" class="button button--disabled" type="button">Увійти</button>
     <span class="alert alert--disabled">Увага, помилка!</span>
-    <span class="link__prefix">Маєте аккаунт? <a href="/login" class="link">Увійти</a></span>
+    <span class="link__prefix">Забули пароль? <a href="/recovery" class="link">Відновити</a></span>
   </form>
 </div>
 

@@ -45,4 +45,9 @@ body {
     font-size: s.space(6);
     color: s.color(dark);
   }
+  &__subtitle {
+    font-size: 14px;
+    color: s.color(grey);
+    line-height: 1.5em;
+  }
 }

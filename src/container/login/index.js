@@ -1,8 +1,10 @@
-import { Form, REG_EXP_EMAIL, REG_EXP_PASSWORD } from "../../script/form"
+import { Form, REG_EXP_EMAIL } from "../../script/form"
+import { saveSession } from "../../script/session" 
 
-class RecoveryForm extends Form {
+class SingupForm extends Form {
   FIELD_NAME = {
     EMAIL: 'email',
+    PASSWORD: 'password',
   }
   FIELD_ERROR = {
     IS_EMPTY: 'Введіть значення в поле',
@@ -29,7 +31,7 @@ class RecoveryForm extends Form {
     } else {
       this.setAlert('progress', 'Завантаження...')
       try {
-        const res = await fetch('/recovery', {
+        const res = await fetch('/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: this.convertData()
@@ -37,8 +39,8 @@ class RecoveryForm extends Form {
         const data = await res.json()
         if(res.ok) {
           this.setAlert('success', data.message)
-
-          location.assign('/recovery-confirm')
+          saveSession(data.session)
+          location.assign('/')
         } else {
           this.setAlert('error', data.message)
         }
@@ -50,9 +52,15 @@ class RecoveryForm extends Form {
   convertData = () => {
     return JSON.stringify({
       [this.FIELD_NAME.EMAIL]: this.value[this.FIELD_NAME.EMAIL],
+      [this.FIELD_NAME.PASSWORD]: this.value[this.FIELD_NAME.PASSWORD],
     })
   }
 }
 
-window.recoveryForm = new RecoveryForm()
+window.signupForm = new SingupForm()
 
+document.addEventListener('DOMContentLoaded', () => {
+  if(window.session) {
+    location.assign('/')
+  }
+})
