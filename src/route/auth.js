@@ -8,9 +8,19 @@ const { Confirm } = require('../class/confirm')
 const { Session } = require('../class/sessions')
 
 User.create ({
-  email: 'test@mail.com',
+  email: 'user@mail.com',
   password: 123,
   role: 1,
+})
+User.create ({
+  email: 'admin@mail.com',
+  password: 123,
+  role: 2,
+})
+User.create ({
+  email: 'developer@mail.com',
+  password: 123,
+  role: 3,
 })
 
 // ================================================================
@@ -103,8 +113,6 @@ router.get('/recovery', function (req, res) {
 router.post('/recovery', function (req, res) {
   const {email} = req.body
 
-  console.log(email)
-
   if(!email) {
     return res.status(400).json({
       message: "Помилка. Обовʼязкові поля відсутні!",
@@ -181,8 +189,6 @@ router.post('/recovery-confirm', function (req, res) {
 
     user.password = password
 
-    console.log(user)
-
     const session = Session.create(user)
 
     return res.status(200).json({
@@ -234,8 +240,6 @@ router.post('/signup-confirm', function (req, res) {
     })
   }
 
-  console.log(code, token)
-
   try {
     const session = Session.get(token)
 
@@ -262,7 +266,7 @@ router.post('/signup-confirm', function (req, res) {
     const user = User.getByEmail(session.user.email)
     user.isConfirm = true
     session.user.isConfirm = true
- 
+
     return res.status(200).json({
       message: "Пошта успішно підтверджена",
       session,

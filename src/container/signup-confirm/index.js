@@ -23,7 +23,6 @@ class SignupConfirmForm extends Form {
     if (this.disabled === true) {
       this.validateAll()
     } else {
-      console.log(this.value)
       this.setAlert('progress', 'Завантаження...')
       try {
         const res = await fetch('/signup-confirm', {
